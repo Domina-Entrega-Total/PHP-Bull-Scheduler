@@ -20,11 +20,19 @@ require_once 'vendor/autoload.php';
 use DominaEntregaTotal\BullScheduler\Queue;
 
 // You can specify any value for Redis that Predis considers valid for the first parameter of Predis\Client
-$queue = new Queue('example queue', 'tcp://localhost:6379');
-$queue2 = new Queue('another queue', array('redis' => array('host' => 'localhost', 'port' => 6379)));
-$queue3 = new Queue('different queue', new Predis\Client());
+$queue = new Queue('name-queue', 'tcp://localhost:6379');
+$queue2 = new Queue('name-queue', ['redis' => ['host' => 'localhost', 'port' => 6379]]);
+$queue3 = new Queue('other-queue', new Predis\Client());
 
-$job_id = $queue->add(array('data' => 'value'));
+$job_id = $queue->add(['data' => 'value']);
+
+// with process name and options
+$job_id = $queue->add('name-process', [
+                            'key' => 'value',
+                        ], [
+                            'attempts'  => 3, // try 3 attemps
+                            'delay'     => 1000, // delay 1 second in miliseconds
+                        ]);
 ```
 
 ## Caveats
