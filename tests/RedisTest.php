@@ -1,9 +1,9 @@
-<?php namespace HackThisSite\BullScheduler\Tests;
+<?php namespace DominaEntregaTotal\BullScheduler\Tests;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \HackThisSite\BullScheduler\Queue
+ * @covers \DominaEntregaTotal\BullScheduler\Queue
  */
 class RedisTest extends TestCase {
 

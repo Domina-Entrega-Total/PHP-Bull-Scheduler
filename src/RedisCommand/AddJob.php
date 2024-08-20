@@ -3,13 +3,13 @@
 /*
  * This file is part of the PHP-Bull-Scheduler package.
  *
- * (c) HackThisSite <staff@hackthissite.org>
+ * (c) DominaEntregaTotal <staff@dominaentregatotal.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace HackThisSite\BullScheduler\RedisCommand;
+namespace DominaEntregaTotal\BullScheduler\RedisCommand;
 
 use Predis\Command\ScriptCommand;
 

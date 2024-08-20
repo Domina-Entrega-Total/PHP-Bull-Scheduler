@@ -1,16 +1,16 @@
 {
-    "name": "hackthissite/php-bull-scheduler",
+    "name": "dominaentregatotal/php-bull-scheduler",
     "description": "PHP library to schedule Redis jobs for the NodeJS Bull Redis queue",
     "type": "library",
     "license": "MIT",
     "keywords": ["php", "nodejs", "bull", "redis", "queue", "scheduler"],
     "support": {
-        "issues": "https://github.com/hackthissite/php-bull-scheduler/issues"
+        "issues": "https://github.com/dominaentregatotal/php-bull-scheduler/issues"
     },
     "authors": [
         {
-            "name": "HackThisSite",
-            "email": "staff@hackthissite.org"
+            "name": "DominaEntregaTotal",
+            "email": "staff@dominaentregatotal.org"
         }
     ],
     "require": {
@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "HackThisSite\\BullScheduler\\": "src"
+            "DominaEntregaTotal\\BullScheduler\\": "src"
         }
     }
 }
