@@ -89,7 +89,7 @@ class Queue {
     $opts = is_array($opts) ? $opts : [$opts];
 
     // Initial variable configuration
-    $timestamp = intval(str_replace('.', '', microtime(true)));
+    $timestamp = intval(microtime(true) * 1000);
     $delay = isset($opts['delay']) ? intval($opts['delay']) : 0;
 
     // Defining default values
