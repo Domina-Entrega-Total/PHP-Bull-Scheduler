@@ -88,17 +88,20 @@ class Queue {
     }
     $opts = (is_array($opts) ? $opts : array($opts));
 
-    // Set timestamp and delay
+    // Set intial vars
     $timestamp = intval(str_replace('.', '', microtime(true)));
-    $delay = (isset($opts['delay']) ? intval($opts['delay']) : 0);
+    $delay = isset($opts['delay']) ? intval($opts['delay']) : 0;
 
-    // Merge defaults with $opts
-    $defaults = array(
-      'attempts'  => 1,
-      'timestamp' => $timestamp,
-      'delay'     => $delay,
-    );
-    $options = array_merge_recursive($defaults, $opts);
+    // Definition of deafult values
+    $defaults = [
+        'attempts'  => 1,
+        'timestamp' => $timestamp,
+        'delay'     => $delay,
+    ];
+
+    // Combination of default options with the provided options
+    $options = array_merge($defaults, $opts);
+
 
     return $this->redis->addjob(
       $this->keyPrefix.'wait',
