@@ -122,7 +122,7 @@ class Queue {
         json_encode($options),
         $timestamp,
         $delay,
-        ($delay > 0) ? $timestamp + ($delay * 1000) : 0,
+        ($delay > 0) ? $timestamp + $delay : 0,
         intval($options['priority']),
         $options['lifo'] ? 'RPUSH' : 'LPUSH',
         $this->token
