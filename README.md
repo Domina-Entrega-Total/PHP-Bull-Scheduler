@@ -8,7 +8,7 @@ PHP library to schedule jobs for the NodeJS [Bull Redis queue](https://github.co
 
 ## Installation
 Install via composer:
-`composer require Domina-Entrega-Total/PHP-Bull-Scheduler`
+`composer require dominaentregatotal/php-bull-scheduler`
 
 ## Usage
 This library operates under the namspace `DominaEntregaTotal\BullScheduler` and uses [Predis](https://github.com/nrk/predis) under the hood.

@@ -3,7 +3,7 @@
 /*
  * This file is part of the PHP-Bull-Scheduler package.
  *
- * (c) DominaEntregaTotal <staff@dominaentregatotal.org>
+ * (c) DominaEntregaTotal <jorge.carrillo@domina.com.co>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
