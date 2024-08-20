@@ -79,48 +79,53 @@ class Queue {
     $this->redis->getProfile()->defineCommand('addjob', 'DominaEntregaTotal\BullScheduler\RedisCommand\AddJob');
   }
 
-  public function add($name, $data = array(), $opts = array()) {
-    // Adjust params if needed
+  public function add($name, $data = [], $opts = []) {
+    // Adjust parameters if necessary
     if (!is_string($name)) {
-      $opts = $data;
-      $data = $name;
-      $name = '__default__';
+        $opts = is_array($data) ? $data : [$data];
+        $data = $name;
+        $name = '__default__';
     }
-    $opts = (is_array($opts) ? $opts : array($opts));
+    $opts = is_array($opts) ? $opts : [$opts];
 
-    // Set intial vars
+    // Initial variable configuration
     $timestamp = intval(str_replace('.', '', microtime(true)));
     $delay = isset($opts['delay']) ? intval($opts['delay']) : 0;
 
-    // Definition of deafult values
+    // Defining default values
     $defaults = [
-        'attempts'  => 1,
-        'timestamp' => $timestamp,
-        'delay'     => $delay,
+        'attempts'       => 1,
+        'timestamp'      => $timestamp,
+        'delay'          => $delay,
+        'priority'       => 0,
+        'removeOnFail'   => false,
+        'removeOnComplete' => false,
+        'stackTraceLimit' => 10,
+        'jobId'          => null,
+        'lifo'           => false,
     ];
 
-    // Combination of default options with the provided options
+    // Combining default options with provided options
     $options = array_merge($defaults, $opts);
 
-
     return $this->redis->addjob(
-      $this->keyPrefix.'wait',
-      $this->keyPrefix.'paused',
-      $this->keyPrefix.'meta-paused',
-      $this->keyPrefix.'id',
-      $this->keyPrefix.'delayed',
-      $this->keyPrefix.'priority',
-      $this->keyPrefix,
-      (isset($opts['customJobId']) ? $opts['customJobId'] : ''),
-      $name,
-      json_encode($data),
-      json_encode($options),
-      $timestamp,
-      $delay,
-      ($delay ? $timestamp + $delay : 0),
-      (isset($opts['priority']) ? intval($opts['priority']) : 0),
-      (isset($opts['lifo']) ? 'RPUSH' : 'LPUSH'),
-      $this->token
+        $this->keyPrefix . 'wait',
+        $this->keyPrefix . 'paused',
+        $this->keyPrefix . 'meta-paused',
+        $this->keyPrefix . 'id',
+        $this->keyPrefix . 'delayed',
+        $this->keyPrefix . 'priority',
+        $this->keyPrefix,
+        $options['jobId'] ?? '',
+        $name,
+        json_encode($data),
+        json_encode($options),
+        $timestamp,
+        $delay,
+        ($delay > 0) ? $timestamp + ($delay * 1000) : 0,
+        intval($options['priority']),
+        $options['lifo'] ? 'RPUSH' : 'LPUSH',
+        $this->token
     );
   }
 
